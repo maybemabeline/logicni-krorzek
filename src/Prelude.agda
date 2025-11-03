@@ -12,28 +12,31 @@ data _≡_ {A : Set} : A → A → Set where
 module _ {A : Set} where
 
   symm : {x y : A} → x ≡ y → y ≡ x
-  symm = {!!}
+  symm refl = refl
 
   concat : {x y z : A} → x ≡ y → y ≡ z → x ≡ z
-  concat = {!!}
+  concat p refl = p
 
   _∙_ = concat
   infixr 21 _∙_
 
-  concat-assoc : {x y z w : A} (p : x ≡ y) (q : y ≡ z) (r : z ≡ w)
+  assoc-concat : {x y z w : A} (p : x ≡ y) (q : y ≡ z) (r : z ≡ w)
                → (p ∙ q) ∙ r ≡ p ∙ (q ∙ r)
-  concat-assoc = {!!}
+  assoc-concat p q refl = refl
 
 
   left-unit-concat : {x y : A} (p : x ≡ y) → refl ∙ p ≡ p
-  left-unit-concat = {!!}
+  left-unit-concat refl = refl
 
   right-unit-concat : {x y : A} (p : x ≡ y) → p ∙ refl ≡ p
-  right-unit-concat = {!!}
+  right-unit-concat p = refl
 
 
   left-inv-concat : {x y : A} (p : x ≡ y) → (symm p) ∙ p ≡ refl
-  left-inv-concat = {!!}
+  left-inv-concat refl = refl
 
   right-inv-concat : {x y : A} (p : x ≡ y) → p ∙ (symm p) ≡ refl
-  right-inv-concat = {!!}
+  right-inv-concat refl = refl
+
+ap : {A B : Set} {x y : A} (f : A → B) → x ≡ y → f x ≡ f y
+ap f refl = refl
